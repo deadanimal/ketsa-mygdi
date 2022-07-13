@@ -684,7 +684,7 @@ class LaporanDashboardController extends Controller
 
         
         
-        //BILANGAN KESELURUHAN METADATA ========================================
+        //BILANGAN KESELURUHAN METADATA ======================================================================
         if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
             $bil_keseluruhan_metadata = count(MetadataGeo::on('pgsql2')->select('id')->get());
         } else {
@@ -693,57 +693,7 @@ class LaporanDashboardController extends Controller
         
         
         
-        //Jumlah Metadata Mengikut Kategori ====================================
-        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('createdate','kategori');
-        
-        if (!empty($tarikh_mula)) {
-            $bil_metadata_kategori = $bil_metadata_kategori->where('createdate', '>=', $tarikh_mula);
-        }
-        if (!empty($tarikh_akhir)) {
-            $bil_metadata_kategori = $bil_metadata_kategori->where('createdate', '<=', $tarikh_akhir);
-        }
-        
-        if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
-            
-        }else{
-            if(isset(auth::user()->agensiOrganisasi->name)){
-                $bil_metadata_kategori = $bil_metadata_kategori->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
-            }
-        }
-        
-        $bil_metadata_kategori = $bil_metadata_kategori->orderBy('createdate', 'asc')->get();
-
-        $metadata_kategori = [];
-        foreach ($bil_metadata_kategori as $met) {
-            $month = date('M-Y', strtotime($met->createdate));
-            $kategori = $met->kategori;
-
-            if ($kategori != null) {
-                $metadata_kategori[$month][ucfirst($kategori)][] = '0';
-            }
-        }
-        
-        $chartkategori = [];
-        foreach ($metadata_kategori as $k => $v) {
-            $dataset = $imagery = $gridded = $services = 0;
-            if (isset($v['Dataset'])) {
-                $dataset = count($v['Dataset']);
-            }
-            if (isset($v['Services'])) {
-                $services = count($v['Services']);
-            }
-            if (isset($v['Imagery'])) {
-                $imagery = count($v['Imagery']);
-            }
-            if (isset($v['Gridded'])) {
-                $gridded = count($v['Gridded']);
-            }
-            $chartkategori[] = ["month" => $k, "first" => $dataset, "second" => $services, "third" => $imagery, "forth" => $gridded];
-        }
-
-        
-        
-        //Jumlah Metadata Mengikut Kategori Topik ==============================
+        //Jumlah Metadata Mengikut Kategori Topik ============================================================
         $bil_metadata_kategori_topik = MetadataGeo::on('pgsql2')->select('data');
         
         if (!empty($tarikh_mula)) {
@@ -809,70 +759,78 @@ class LaporanDashboardController extends Controller
         }
         
         
-
-        //Jumlah Metadata Mengikut Content Type ================================
-        $bil_metadata_content_type = MetadataGeo::on('pgsql2')->select('content_type');
+        
+        //Jumlah Metadata Mengikut Kategori ==================================================================
+        $bil_metadata_kategori = MetadataGeo::on('pgsql2')->select('createdate','kategori','content_type','c10_state');
         
         if (!empty($tarikh_mula)) {
-            $bil_metadata_content_type = $bil_metadata_content_type->where('createdate', '>=', $tarikh_mula);
+            $bil_metadata_kategori = $bil_metadata_kategori->where('createdate', '>=', $tarikh_mula);
         }
         if (!empty($tarikh_akhir)) {
-            $bil_metadata_content_type = $bil_metadata_content_type->where('createdate', '<=', $tarikh_akhir);
+            $bil_metadata_kategori = $bil_metadata_kategori->where('createdate', '<=', $tarikh_akhir);
         }
         
         if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
             
         }else{
             if(isset(auth::user()->agensiOrganisasi->name)){
-                $bil_metadata_content_type = $bil_metadata_content_type->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
+                $bil_metadata_kategori = $bil_metadata_kategori->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
             }
         }
         
-        $bil_metadata_content_type = $bil_metadata_content_type->orderBy('createdate', 'asc')->get();
-        
+        $bil_metadata_kategori = $bil_metadata_kategori->orderBy('createdate', 'asc')->get();
+        $jumlah_metadata_mengikut_negeri = $bil_metadata_kategori;
+        $bil_metadata_content_type = $bil_metadata_kategori;
+
+        $metadata_kategori = [];
         $metadata_content_type = [];
-        foreach ($bil_metadata_content_type as $met) {
-                $content_type = $met->content_type;
-                $metadata_content_type['content'][ucfirst($content_type)][] = '0';
+        $metadatas = [];
+        foreach ($bil_metadata_kategori as $met) {
+            $month = date('M-Y', strtotime($met->createdate));
+            $kategori = $met->kategori;
+
+            if ($kategori != null) {
+                $metadata_kategori[$month][ucfirst($kategori)][] = '0';
+            }
+            
+            //Jumlah Metadata Mengikut Content Type ==============================================================
+            $content_type = $met->content_type;
+            $metadata_content_type['content'][ucfirst($content_type)][] = '0';
+
+            //Jumlah Metadata Mengikut Negeri ====================================================================
+            $negeri = $met->c10_state;
+            if ($negeri != null) {
+                if ($negeri == 'wpPutrajaya') {
+                    $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
+                } else {
+                    $metadatas['negeri'][ucfirst($negeri)][] = 'test';
+                }
+            }
         }
+        
+        $chartkategori = [];
+        foreach ($metadata_kategori as $k => $v) {
+            $dataset = $imagery = $gridded = $services = 0;
+            if (isset($v['Dataset'])) {
+                $dataset = count($v['Dataset']);
+            }
+            if (isset($v['Services'])) {
+                $services = count($v['Services']);
+            }
+            if (isset($v['Imagery'])) {
+                $imagery = count($v['Imagery']);
+            }
+            if (isset($v['Gridded'])) {
+                $gridded = count($v['Gridded']);
+            }
+            $chartkategori[] = ["month" => $k, "first" => $dataset, "second" => $services, "third" => $imagery, "forth" => $gridded];
+        }
+        
         $chartcontenttype = [];
         foreach ($metadata_content_type['content'] as $k => $v) {
             $chartcontenttype[] = ["country" => $k, 'litres' => count($v)];
         }
-
         
-        
-        //Jumlah Metadata Mengikut Negeri ======================================
-        $jumlah_metadata_mengikut_negeri = MetadataGeo::on('pgsql2')->select('c10_state');
-        
-        if (!empty($tarikh_mula)) {
-            $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->where('createdate', '>=', $tarikh_mula);
-        }
-        if (!empty($tarikh_akhir)) {
-            $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->where('createdate', '<=', $tarikh_akhir);
-        }
-        
-        if (strpos(auth::user()->assigned_roles, 'Pentadbir Metadata') !== false || strpos(auth::user()->assigned_roles, 'Pentadbir Aplikasi') !== false) {
-            
-        }else{
-            if(isset(auth::user()->agensiOrganisasi->name)){
-                $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->where('agensi_organisasi','ilike',auth::user()->agensiOrganisasi->name);
-            }
-        }
-        
-        $jumlah_metadata_mengikut_negeri = $jumlah_metadata_mengikut_negeri->orderBy('createdate', 'asc')->get();
-        
-        $metadatas = [];
-        foreach ($jumlah_metadata_mengikut_negeri as $met) {
-                $negeri = $met->c10_state;
-                if ($negeri != null) {
-                    if ($negeri == 'wpPutrajaya') {
-                        $metadatas['negeri']['W.P. Putrajaya'][] = 'test';
-                    } else {
-                        $metadatas['negeri'][ucfirst($negeri)][] = 'test';
-                    }
-                }
-        }
         $chartnegeri = [];
         if (array_key_exists("negeri",$metadatas)){
             foreach ($metadatas['negeri'] as $k => $v) {
