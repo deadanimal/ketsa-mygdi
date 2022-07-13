@@ -717,7 +717,7 @@ class LaporanDashboardController extends Controller
         $chartkategoritopik = [];
         libxml_use_internal_errors(true);
         $bil_metadata_kategori_topik->chunk(500, function( $var ) use(&$metadata_kategori_topik) {
-            foreach( $var as $met ) {
+            foreach($var as $met) {
                 $ftestxml2 = <<<XML
                     $met->data
                     XML;
@@ -781,14 +781,14 @@ class LaporanDashboardController extends Controller
             }
         }
         
-        $bil_metadata_kategori = $bil_metadata_kategori->orderBy('createdate', 'asc')->get();
+        $bil_metadata_kategori = $bil_metadata_kategori->orderBy('createdate', 'asc');
         
         $metadata_kategori = [];
         $metadata_content_type = [];
         $metadatas = [];
         
-        $bil_metadata_kategori_topik->chunk(500, function( $var ) use(&$metadata_kategori,&$metadata_content_type,&$metadatas) {
-            foreach( $var as $met ) {
+        $bil_metadata_kategori->chunk(500, function($var) use(&$metadata_kategori,&$metadata_content_type,&$metadatas) {
+            foreach($var as $met) {
                 $month = date('M-Y', strtotime($met->createdate));
                 $kategori = $met->kategori;
 
