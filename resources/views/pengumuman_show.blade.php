@@ -46,7 +46,9 @@
                         @csrf
                         <input type="hidden" name="metadata_id" value="{{ $pengumuman->metadata_id }}">
                     </form>
-                    <a href="{{ url('lihat_metadata_nologin').'/'.$pengumuman->metadata_id }}" class="aViewMetadata" data-metid="{{$pengumuman->metadata_id}}">Perincian Metadata</a>
+                    @if(isset($pengumuman->metadata_id) && $pengumuman->metadata_id != "")
+                        <a href="{{ url('lihat_metadata_nologin').'/'.$pengumuman->metadata_id }}" class="aViewMetadata" data-metid="{{$pengumuman->metadata_id}}">Perincian Metadata</a>
+                    @endif
                 </div>
             </div>
         </div>
