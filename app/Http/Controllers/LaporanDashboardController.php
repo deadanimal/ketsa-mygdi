@@ -1252,8 +1252,11 @@ class LaporanDashboardController extends Controller
         if ($request->jenis_laporan == 'laporan_perlepasan_data') {
             $mohondatadb = MohonData::select('id','user_id','name')->where('dihantar','1')->whereNotNull('assign_admin');
         
-            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
-                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            if(isset($request->tahun) && $request->tahun !== null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun);
+            }
+            if(isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereMonth('created_at', '=', $bulan);
             }
             if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
                 $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
@@ -1294,8 +1297,11 @@ class LaporanDashboardController extends Controller
         } elseif ($request->jenis_laporan == 'anggaran_jimat_kos') {
             $mohondatadb = MohonData::where('dihantar','1')->whereIn('status',['1','3']);
             
-            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
-                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            if(isset($request->tahun) && $request->tahun !== null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun);
+            }
+            if(isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereMonth('created_at', '=', $bulan);
             }
             if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
                 $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
@@ -1340,8 +1346,11 @@ class LaporanDashboardController extends Controller
         } elseif ($request->jenis_laporan == 'anggaran_jimat_kos_kategori') {
             $mohondatadb = MohonData::where('dihantar','1')->whereIn('status',['1','3']);
             
-            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
-                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            if(isset($request->tahun) && $request->tahun !== null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun);
+            }
+            if(isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereMonth('created_at', '=', $bulan);
             }
             if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
                 $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
@@ -1386,8 +1395,11 @@ class LaporanDashboardController extends Controller
         } elseif ($request->jenis_laporan == 'pelepasan_data_tema') {
             $mohondatadb = MohonData::select('id','user_id','name');
         
-            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
-                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            if(isset($request->tahun) && $request->tahun !== null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun);
+            }
+            if(isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereMonth('created_at', '=', $bulan);
             }
             if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
                 $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
@@ -1432,8 +1444,11 @@ class LaporanDashboardController extends Controller
         } elseif ($request->jenis_laporan == 'pelepasan_data_kategori_pemohon_data') {
             $mohondatadb = MohonData::where('dihantar','1')->whereIn('status',['1','3']);
             
-            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
-                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            if(isset($request->tahun) && $request->tahun !== null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun);
+            }
+            if(isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereMonth('created_at', '=', $bulan);
             }
             if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
                 $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
@@ -1477,8 +1492,11 @@ class LaporanDashboardController extends Controller
         } else {
             $mohondatadb = MohonData::where('dihantar','1')->whereNotNull('assign_admin');
             
-            if(isset($request->tahun) && $request->tahun !== null && isset($request->bulan) && $request->bulan != null){
-                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun)->whereMonth('created_at', '=', $bulan);
+            if(isset($request->tahun) && $request->tahun !== null){
+                $mohondatadb = $mohondatadb->whereYear('created_at', '=', $tahun);
+            }
+            if(isset($request->bulan) && $request->bulan != null){
+                $mohondatadb = $mohondatadb->whereMonth('created_at', '=', $bulan);
             }
             if(isset($request->agensi) && $request->agensi !== null && isset($request->agensi) && $request->agensi != null){
                 $mohondatadb = $mohondatadb->whereHas("users", function ($q) use($agensi){
