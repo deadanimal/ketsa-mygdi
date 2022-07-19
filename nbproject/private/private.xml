@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/layouts/app_ketsa_pdf.blade.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/routes/web.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/layouts/app_ketsa.blade.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/layouts/app_ketsa_pdf2.blade.php</file>
-            <file>file:/Applications/MAMP/htdocs/ketsa-mygdi/resources/views/lihat_metadata_nologin_print_pdf.blade.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

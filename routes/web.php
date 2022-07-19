@@ -311,6 +311,8 @@ Route::post('get_subkategori', 'SenaraiDataController@get_subkategori');
 Route::post('get_lapisan_data', 'SenaraiDataController@get_lapisan_data');
 Route::get('getLaporanMetadata', 'LaporanDashboardController@getLaporanMetadata');
 
+Route::post('getXmlWms', 'MetadataController@getXmlWms');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

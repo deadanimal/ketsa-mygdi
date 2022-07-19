@@ -351,8 +351,13 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         $(document).on("click", "#btnTestServiceUrl3_wms", function () {
             var mapurl = $.trim($('#c2_serviceUrl').val());
             if(checkServiceUrl(mapurl)){
-                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/wms_leaflet.php?url='+mapurl);
-                $('#modal-showmap').modal('show');
+                if(mapurl.toLowerCase().indexOf("getcapabilities") >= 0){
+                    $('#mapiframe').attr('src', '<?php echo url("/"); ?>/wms_leaflet.php?url='+encodeURIComponent(mapurl)+'&csrf={{ csrf_token() }}');
+                    $('#modal-showmap').modal('show');
+                }else{
+                    $('#mapiframe').attr('src', mapurl);
+                    $('#modal-showmap').modal('show');
+                }
             }else{
                 alert("Service URL is empty!");
             }
