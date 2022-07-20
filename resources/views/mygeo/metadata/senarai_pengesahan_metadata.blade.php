@@ -103,9 +103,11 @@
                                                     </td>
                                                     <td>
                                                         <?php //sahkan(kemaskini)======================================= ?>
-                                                        <a href="{{ url('/kemaskini_metadata/'.$key) }}">
-                                                            <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:3px;">Semak</button>
-                                                        </a>
+                                                        <span data-toggle="tooltip" title="Semak">
+                                                            <a href="{{ url('/kemaskini_metadata/'.$key) }}">
+                                                                <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:3px;">Semak</button>
+                                                            </a>
+                                                        </span>
     <!--                                                    <button type="button" class="btn btn-danger btn_tolak btn-sm" data-metadataid="{{ $key }}">Tolak</button>
                                                         <button type="button" class="btn btn-success btn_sahkan btn-sm" data-metadataid="{{ $key }}">Sahkan</button>-->
                                                     </td>
