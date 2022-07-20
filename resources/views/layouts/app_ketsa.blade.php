@@ -36,17 +36,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
-    <link href="/assetsweb/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('/assetsweb/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Vendor CSS Files -->
-    <link href="/assetsweb/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assetsweb/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assetsweb/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assetsweb/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="/assetsweb/vendor/aos/aos.css" rel="stylesheet">
+    <link href="{{ asset('/assetsweb/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assetsweb/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assetsweb/vendor/venobox/venobox.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assetsweb/vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assetsweb/vendor/aos/aos.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="/assetsweb/css/style.css" rel="stylesheet">
+    <link href="{{ asset('/assetsweb/css/style.css') }}" rel="stylesheet">
 
 
     <style>
@@ -384,18 +384,18 @@
     </script>
 
     <!-- Vendor JS Files -->
-    <script src="/assetsweb/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="/assetsweb/vendor/php-email-form/validate.js"></script>
-    <script src="/assetsweb/vendor/waypoints/jquery.waypoints.min.js"></script>
-    <script src="/assetsweb/vendor/counterup/counterup.min.js"></script>
-    <script src="/assetsweb/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/assetsweb/vendor/venobox/venobox.min.js"></script>
-    <script src="/assetsweb/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="/assetsweb/vendor/typed.js/typed.min.js"></script>
-    <script src="/assetsweb/vendor/aos/aos.js"></script>
+    <script src="{{ asset('/assetsweb/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/counterup/counterup.min.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/venobox/venobox.min.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/typed.js/typed.min.js') }}"></script>
+    <script src="{{ asset('/assetsweb/vendor/aos/aos.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="/assetsweb/js/main.js"></script>
+    <script src="{{ asset('/assetsweb/js/main.js') }}"></script>
     <script>
         // Restricts input for the set of matched elements to the given inputFilter function.
         (function($) {
