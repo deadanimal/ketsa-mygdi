@@ -5,8 +5,8 @@
         thead input {
             width: 100%;
         }
-
     </style>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="header">
@@ -246,17 +246,17 @@
                                 <form method="post" action="{{ url('/lihat_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Lihat"><i class="fas fa-eye"></i></button>
                                 </form>
                                 <?php //kemaskini======================================= ?>
                                 <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
-                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Kemas Kini"><i class="fas fa-edit"></i></button>
                                 </a>
                                 <?php //delete========================================== ?>
                                 <form method="post" action="{{ url('/delete_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash"></i></button>
                                 </form>
                               </div>
                           </td>
@@ -310,17 +310,17 @@
                                 <form method="post" action="{{ url('/lihat_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Lihat"><i class="fas fa-eye"></i></button>
                                 </form>
                                 <?php //kemaskini======================================= ?>
                                 <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
-                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Kemas Kini"><i class="fas fa-edit"></i></button>
                                 </a>
                                 <?php //delete========================================== ?>
                                 <form method="post" action="{{ url('/delete_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash"></i></button>
                                 </form>
                               </div>
                           </td>
@@ -368,17 +368,17 @@
                                 <form method="post" action="{{ url('/lihat_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Lihat"><i class="fas fa-eye"></i></button>
                                 </form>
                                 <?php //kemaskini======================================= ?>
                                 <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
-                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Kemas Kini"><i class="fas fa-edit"></i></button>
                                 </a>
                                 <?php //delete========================================== ?>
                                 <form method="post" action="{{ url('/delete_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash"></i></button>
                                 </form>
                               </div>
                           </td>
@@ -423,17 +423,17 @@
                                 <form method="post" action="{{ url('/lihat_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;"><i class="fas fa-eye"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-primary mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Lihat"><i class="fas fa-eye"></i></button>
                                 </form>
                                 <?php //kemaskini======================================= ?>
                                 <a href="{{ url('/kemaskini_metadata/'.$val[1]->id) }}">
-                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;"><i class="fas fa-edit"></i></button>
+                                    <button type="button" class="btn btn-sm btn-success mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Kemas Kini"><i class="fas fa-edit"></i></button>
                                 </a>
                                 <?php //delete========================================== ?>
                                 <form method="post" action="{{ url('/delete_metadata') }}">
                                     @csrf
                                     <input type="hidden" name="metadata_id" value="{{ $val[1]->id }}">
-                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;"><i class="fas fa-trash"></i></button>
+                                    <button type="button" class="btn btn-sm btn-danger btnDelete mr-2" style="margin-bottom:3px;" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash"></i></button>
                                 </form>
                               </div>
                           </td>

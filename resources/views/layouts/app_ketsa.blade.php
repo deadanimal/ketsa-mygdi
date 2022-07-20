@@ -399,19 +399,19 @@
     <script>
         // Restricts input for the set of matched elements to the given inputFilter function.
         (function($) {
-            $("#link_login").popover({
-                placement: 'bottom',
-                sanitize: false,
-                html: true,
-                content : '<span>Login Di Sini</span><button type="button" class="close addGap" onclick="$(&quot;#link_login&quot;).popover(&quot;hide&quot;);">X</button>'
-            });
-            $(".sideMenu").popover({
-                placement: 'left',
-                sanitize: false,
-                html: true,
-                content : '<span>Pilihan Side Menu</span><button type="button" class="close addGap" onclick="$(&quot;.sideMenu&quot;).popover(&quot;hide&quot;);">X</button>'
-            });
-            $('[data-toggle="popover"]').popover('show');
+            // $("#link_login").popover({
+            //     placement: 'bottom',
+            //     sanitize: false,
+            //     html: true,
+            //     content : '<span>Login Di Sini</span><button type="button" class="close addGap" onclick="$(&quot;#link_login&quot;).popover(&quot;hide&quot;);">X</button>'
+            // });
+            // $(".sideMenu").popover({
+            //     placement: 'left',
+            //     sanitize: false,
+            //     html: true,
+            //     content : '<span>Pilihan Side Menu</span><button type="button" class="close addGap" onclick="$(&quot;.sideMenu&quot;).popover(&quot;hide&quot;);">X</button>'
+            // });
+            // $('[data-toggle="popover"]').popover('show');
             $.fn.inputFilter = function(inputFilter) {
                 return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
                     if (inputFilter(this.value)) {

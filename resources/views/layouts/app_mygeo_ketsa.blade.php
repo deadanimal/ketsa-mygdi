@@ -120,6 +120,23 @@
             color: black !important;
         }
 
+        .tooltip-inner {
+            background-color: black !important;
+            color: #ffffff !important;
+            opacity: 1;
+        }
+        .tooltip.top .tooltip-arrow {
+            border-top-color: black;
+        }
+        .tooltip.right .tooltip-arrow {
+            border-right-color: black;
+        }
+        .tooltip.bottom .tooltip-arrow {
+            border-bottom-color: black;
+        }
+        .tooltip.left .tooltip-arrow {
+            border-left-color: black;
+        }
     </style>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -914,13 +931,16 @@
         }
         ?>
         $(document).ready(function() {
-            $("#link_tukarPeranan").popover({
+            $('[data-toggle="tooltip"]').tooltip({
                 placement: 'bottom',
-                sanitize: false,
-                html: true,
-                content : '<span>Tukar Peranan Di Sini</span><button type="button" class="close addGap" onclick="$(&quot;#link_tukarPeranan&quot;).popover(&quot;hide&quot;);">X</button>'
             });
-            $('[data-toggle="popover"]').popover('show');
+            // $("#link_tukarPeranan").popover({
+            //     placement: 'bottom',
+            //     sanitize: false,
+            //     html: true,
+            //     content : '<span>Tukar Peranan Di Sini</span><button type="button" class="close addGap" onclick="$(&quot;#link_tukarPeranan&quot;).popover(&quot;hide&quot;);">X</button>'
+            // });
+            // $('[data-toggle="popover"]').popover('show');
             <?php
             //notify user (pemohon data only) to do penilaian after 6 months==================================
             if(Auth::user()->hasRole(['Pemohon Data']) && Session::has('msgPenilaian') && Session::get('msgPenilaian') !== ""){

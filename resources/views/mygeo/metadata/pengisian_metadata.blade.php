@@ -40,14 +40,13 @@
         font-size: 12px;
         float: right;
     }
-
 </style>
 <style>
-    .table td{
+    .table td {
         padding: 0.2rem 1rem;
     }
 
-    td .form-check-label{
+    td .form-check-label {
         font-weight: bold;
         margin-bottom: .7rem;
         font-size: 15px;
@@ -88,9 +87,8 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <button type="button" class="btn btn-dark float-right" data-toggle="modal"
-                                data-target="#modal-muat-naik-xml">
-                                    <?php echo __('lang.btn_upload_xml'); ?>
+                        <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#modal-muat-naik-xml">
+                            <?php echo __('lang.btn_upload_xml'); ?>
                         </button>
                     </div>
                 </div>
@@ -120,8 +118,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                                             </label>
                                         </div>
                                         <div class="col-8">
-                                            <input class="form-control ml-3" id="file_xml" type="file"
-                                                   name="file_xml" />
+                                            <input class="form-control ml-3" id="file_xml" type="file" name="file_xml" />
                                             <p class="error-message"><span></span></p>
                                         </div>
                                     </div>
@@ -188,37 +185,33 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 </div>
                 <div class="col-12">
                     <div class="card">
-                        <form method="post" class="form-horizontal" id="form_metadata"
-                              action="{{ url('store_metadata') }}" enctype="multipart/form-data">
+                        <form method="post" class="form-horizontal" id="form_metadata" action="{{ url('store_metadata') }}" enctype="multipart/form-data">
                             <input type="hidden" name="metadata_id" id="metadata_id">
                             @csrf
                             <div class="card-body">
                                 <!-- <div class="form-group row"> -->
                                 <div class="clearfix">
                                     <p id="lbl_kategori" class="pl-lg-3 form-control-label" style="display: inline-block;"><?php echo __('lang.metadata_category'); ?> : &nbsp;&nbsp;&nbsp;</p>
-                                    <select name="kategori" id="kategori" class="form-control form-control-sm ml-3"
-                                            style="width:175px;display: inline-block;height:35px;">
+                                    <select name="kategori" id="kategori" class="form-control form-control-sm ml-3" style="width:175px;display: inline-block;height:35px;">
                                         <option selected disabled><?php echo __('lang.dropdown_choose'); ?></option>
                                         <?php
                                         if (count($categories) > 0) {
                                             foreach ($categories as $cat) {
-                                                ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?>
+                                        ?><option value="<?php echo $cat->name; ?>"><?php echo $cat->name; ?>
                                                 </option><?php
-                                    }
-                                }
-                                        ?>
+                                                        }
+                                                    }
+                                                            ?>
                                     </select>
                                     &nbsp;&nbsp;&nbsp;
                                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
                                         <label class="btn btn-secondary active">
                                             <img src="{{ url('/img/flagMalaysia.jpeg') }}" alt="User Avatar">
-                                            <input type="radio" name="flanguage" value="bm"
-                                                   {{ isset($_GET['bhs']) && $_GET['bhs'] == 'bm' ? 'checked' : '' }}>BM
+                                            <input type="radio" name="flanguage" value="bm" {{ isset($_GET['bhs']) && $_GET['bhs'] == 'bm' ? 'checked' : '' }}>BM
                                         </label>
                                         <label class="btn btn-secondary">
                                             <img src="{{ url('/img/flagUnitedKingdom.jpeg') }}" alt="User Avatar">
-                                            <input type="radio" name="flanguage" value="en"
-                                                   {{ isset($_GET['bhs']) && $_GET['bhs'] == 'en' ? 'checked' : '' }}>ENG
+                                            <input type="radio" name="flanguage" value="en" {{ isset($_GET['bhs']) && $_GET['bhs'] == 'en' ? 'checked' : '' }}>ENG
                                         </label>
                                     </div>
                                 </div>
@@ -272,10 +265,8 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                                     @include('mygeo.metadata.pengisian_metadata.data_quality')
                                 </div>
                                 <div id="div_action_buttons">
-                                    <input type="button" data-name="draf" value="Simpan"
-                                           class="btn btn-primary btnDraf btnSubmit">
-                                    <input type="button" data-name="save" value="Hantar"
-                                           class="btn btn-success btnSave btnSubmit">
+                                    <input type="button" data-name="draf" value="Simpan" class="btn btn-primary btnDraf btnSubmit">
+                                    <input type="button" data-name="save" value="Hantar" class="btn btn-success btnSave btnSubmit">
 
                                     <input type="hidden" name="submitAction" id="submitAction" value="save">
                                 </div>
@@ -298,38 +289,38 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
 <script>
     var pengesahs = [];
     $(document).ready(function() {
-        $(document).on('change','#content_info_dropdown',function(){
+        $(document).on('change', '#content_info_dropdown', function() {
             var cat = $('#kategori').val();
-            if(cat == "Dataset" && $(this).val() == "application"){
+            if (cat == "Dataset" && $(this).val() == "application") {
                 $('.divIdentificationInformationUrl').show();
-                $('.inputIdentificationInformationUrl').prop('disabled',false);
+                $('.inputIdentificationInformationUrl').prop('disabled', false);
                 $('.divBrowsingInformationUrl').hide();
-                $('.inputBrowsingInformationUrl').prop('disabled',true);
-            }else{
+                $('.inputBrowsingInformationUrl').prop('disabled', true);
+            } else {
                 $('.divIdentificationInformationUrl').hide();
-                $('.inputIdentificationInformationUrl').prop('disabled',true);
+                $('.inputIdentificationInformationUrl').prop('disabled', true);
                 $('.divBrowsingInformationUrl').show();
-                $('.inputBrowsingInformationUrl').prop('disabled',false);
+                $('.inputBrowsingInformationUrl').prop('disabled', false);
             }
         });
         $('.divIdentificationInformationUrl').hide();
-        $('.inputIdentificationInformationUrl').prop('disabled',true);
+        $('.inputIdentificationInformationUrl').prop('disabled', true);
 
         <?php
-        if(!is_null(old('kategori')) && old('kategori') == "Dataset" && !is_null(old('c1_content_info')) && old('c1_content_info') == "Application"){
-            ?>
+        if (!is_null(old('kategori')) && old('kategori') == "Dataset" && !is_null(old('c1_content_info')) && old('c1_content_info') == "Application") {
+        ?>
             $('.divIdentificationInformationUrl').show();
-            $('.inputIdentificationInformationUrl').prop('disabled',false);
+            $('.inputIdentificationInformationUrl').prop('disabled', false);
             $('.divBrowsingInformationUrl').hide();
-            $('.inputBrowsingInformationUrl').prop('disabled',true);
-            <?php
-        }else{
-            ?>
+            $('.inputBrowsingInformationUrl').prop('disabled', true);
+        <?php
+        } else {
+        ?>
             $('.divIdentificationInformationUrl').hide();
-            $('.inputIdentificationInformationUrl').prop('disabled',true);
+            $('.inputIdentificationInformationUrl').prop('disabled', true);
             $('.divBrowsingInformationUrl').show();
-            $('.inputBrowsingInformationUrl').prop('disabled',false);
-            <?php
+            $('.inputBrowsingInformationUrl').prop('disabled', false);
+        <?php
         }
         ?>
 
@@ -347,54 +338,54 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             $('#mapiframe').attr('src', '<?php echo url("/"); ?>/leafletwms/examples/index.html?url='+mapurl);
         });
         */
-           
-        $(document).on("click", "#btnTestServiceUrl3_wms", function () {
+
+        $(document).on("click", "#btnTestServiceUrl3_wms", function() {
             var mapurl = $.trim($('#c2_serviceUrl').val());
-            if(checkServiceUrl(mapurl)){
-                if(mapurl.toLowerCase().indexOf("getcapabilities") >= 0){
-                    $('#mapiframe').attr('src', '<?php echo url("/"); ?>/wms_leaflet.php?url='+encodeURIComponent(mapurl)+'&csrf={{ csrf_token() }}');
+            if (checkServiceUrl(mapurl)) {
+                if (mapurl.toLowerCase().indexOf("getcapabilities") >= 0) {
+                    $('#mapiframe').attr('src', '<?php echo url("/"); ?>/wms_leaflet.php?url=' + encodeURIComponent(mapurl) + '&csrf={{ csrf_token() }}&server={{ url("/getXmlWms") }}');
                     $('#modal-showmap').modal('show');
-                }else{
+                } else {
                     $('#mapiframe').attr('src', mapurl);
                     $('#modal-showmap').modal('show');
                 }
-            }else{
+            } else {
                 alert("Service URL is empty!");
             }
         });
-//        $(document).on("click", "#btnTestServiceUrl3_wms", function () {
-//            var mapurl = $.trim($('#c2_serviceUrl').val());
-//            if(checkServiceUrl(mapurl)){
-//                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/azrunmap/esri.php?url='+mapurl);
-//                $('#modal-showmap').modal('show');
-//            }else{
-//                alert("Service URL is empty!");
-//            }
-//        });
-        $(document).on("click", "#btnTestServiceUrl3_esri", function () {
+        //        $(document).on("click", "#btnTestServiceUrl3_wms", function () {
+        //            var mapurl = $.trim($('#c2_serviceUrl').val());
+        //            if(checkServiceUrl(mapurl)){
+        //                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/azrunmap/esri.php?url='+mapurl);
+        //                $('#modal-showmap').modal('show');
+        //            }else{
+        //                alert("Service URL is empty!");
+        //            }
+        //        });
+        $(document).on("click", "#btnTestServiceUrl3_esri", function() {
             var mapurl = $.trim($('#c2_serviceUrl').val());
-            if(checkServiceUrl(mapurl)){
+            if (checkServiceUrl(mapurl)) {
                 var mapurl = $.trim($('#c2_serviceUrl').val());
                 checkServiceUrl(mapurl);
-                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url='+mapurl);
-            }else{
+                $('#mapiframe').attr('src', '<?php echo url("/"); ?>/intecxmap/search/view-map-service.html?url=' + mapurl);
+            } else {
                 alert("Service URL is empty!");
             }
         });
-        $(document).on("click", ".btnTestUrl", function () {
+        $(document).on("click", ".btnTestUrl", function() {
             var weburl = $(this).parent().parent().find('.urlToTest').val();
             window.open(weburl, '_blank');
         });
-        
-        function checkServiceUrl(url){
-            if(url === ""){
+
+        function checkServiceUrl(url) {
+            if (url === "") {
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
-        
-        $(document).on('click','#closeServiceUrlMap',function(){
+
+        $(document).on('click', '#closeServiceUrlMap', function() {
             $('#modal-showmap').modal('hide');
         });
 
@@ -433,15 +424,15 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         $('#accordion').hide();
         <?php
         if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
-            ?>
+        ?>
             $('#kategori').show();
             $('#lbl_kategori').show();
-            <?php
+        <?php
         } else {
-            ?>
+        ?>
             $('#kategori').hide();
             $('#lbl_kategori').hide();
-            <?php
+        <?php
         }
         ?>
         $('#div_action_buttons').hide();
@@ -462,19 +453,19 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         if (count($categories) > 0) {
             $type = (isset($metadata->hierarchyLevel->MD_ScopeCode) ? $metadata->hierarchyLevel->MD_ScopeCode : "");
             if (isset($type) && $type != "" && (strtolower($type) == "dataset" || strtolower($type) == "services")) {
-                ?>
+        ?>
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").hide();
-                <?php
+            <?php
             } elseif (isset($type) && $type != "" && (strtolower($type) == "imagery" || strtolower($type) == "gridded")) {
-                ?>
+            ?>
                 $(".div_c4, .div_c5, .div_c6, .div_c7, .div_c8").show();
-                <?php
+        <?php
             }
         }
         ?>
         <?php
         if (isset($_GET['kategori']) && $_GET['kategori'] != "") {
-            ?>
+        ?>
             $('#kategori').val("{{ $_GET['kategori'] }}");
             var kategori = "{{ $_GET['kategori'] }}";
             if (kategori.toLowerCase() == "dataset") {
@@ -499,11 +490,11 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').show();
                 $('.divMaintenanceInfo').hide();
-                $('#content_info_dropdown').prop('disabled',false);
-                $('#content_info_text').prop('disabled',true);
+                $('#content_info_dropdown').prop('disabled', false);
+                $('#content_info_text').prop('disabled', true);
                 $('#content_info_dropdown').show();
                 $('.lblContentInfo').hide();
-                $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#c12_maintenanceUpdate').prop('disabled', true);
                 $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "services") {
                 $('.optContentInfo_dataset').hide();
@@ -520,13 +511,13 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').hide();
                 $('.divMaintenanceInfo').hide();
-                $('#content_info_dropdown').prop('disabled',true);
-                $('#content_info_text').prop('disabled',false);
+                $('#content_info_dropdown').prop('disabled', true);
+                $('#content_info_text').prop('disabled', false);
                 $('.lblContentInfo').html('Live Data and Maps');
                 $('#content_info_text').val('Live Data and Maps');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#c12_maintenanceUpdate').prop('disabled',true);
+                $('#c12_maintenanceUpdate').prop('disabled', true);
                 $('#div_contohJenisMetadata').hide();
             } else if (kategori.toLowerCase() == "gridded") {
                 $('.optContentInfo_dataset').hide();
@@ -543,13 +534,13 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').show();
                 $('.divMaintenanceInfo').show();
-                $('#content_info_dropdown').prop('disabled',true);
-                $('#content_info_text').prop('disabled',false);
+                $('#content_info_dropdown').prop('disabled', true);
+                $('#content_info_text').prop('disabled', false);
                 $('.lblContentInfo').html('Gridded');
                 $('#content_info_text').val('Gridded');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#c12_maintenanceUpdate').prop('disabled', false);
                 $('#div_contohJenisMetadata').show();
             } else if (kategori.toLowerCase() == "imagery") {
                 $('.optContentInfo_dataset').hide();
@@ -566,13 +557,13 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('#refsys_projection,#refsys_semiMajorAxis,#refsys_ellipsoid,#refsys_axis_units,#refsys_datum,#refsys_denomFlatRatio').prop('readonly', true);
                 $('.divDataQualityTabs').show();
                 $('.divMaintenanceInfo').show();
-                $('#content_info_dropdown').prop('disabled',true);
-                $('#content_info_text').prop('disabled',false);
+                $('#content_info_dropdown').prop('disabled', true);
+                $('#content_info_text').prop('disabled', false);
                 $('.lblContentInfo').html('Imagery');
                 $('#content_info_text').val('Imagery');
                 $('.lblContentInfo').show();
                 $('#content_info_dropdown').hide();
-                $('#c12_maintenanceUpdate').prop('disabled',false);
+                $('#c12_maintenanceUpdate').prop('disabled', false);
                 $('#div_contohJenisMetadata').show();
             }
 
@@ -585,22 +576,22 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 $('#accordion').show();
                 $('#div_action_buttons').show();
             }
-            <?php
+        <?php
         }
         ?>
 
-        $(document).on('change', '#kategori', function(){
+        $(document).on('change', '#kategori', function() {
             var url = '{{ url("/mygeo_pengisian_metadata") }}';
             <?php
             if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
-                ?>
+            ?>
                 url += '?bhs={{ $_GET["bhs"] }}';
-                url += '&kategori='+$(this).val();
-                <?php
-            }else{
-                ?>
-                url += '?kategori='+$(this).val();
-                <?php
+                url += '&kategori=' + $(this).val();
+            <?php
+            } else {
+            ?>
+                url += '?kategori=' + $(this).val();
+            <?php
             }
             ?>
 
@@ -610,35 +601,35 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         $(document).on('change', '#c2_product_type', function() {
             var type = $(this).val();
             if (type == "Application") {
-//                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
+                //                $('#c2_abstract').attr('placeholder','Nama Aplikasi – Tujuan – Tahun Pembangunan – Kemaskini – Data Terlibat – Sasaran Pengguna – Versi – Perisian Yang Digunakan Dalam Pembangunan');
                 $('.abstractApplication').show();
                 $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Document") {
-//                $('#c2_abstract').attr('placeholder', 'Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
+                //                $('#c2_abstract').attr('placeholder', 'Nama Dokumen – Tujuan – Tahun Terbitan – Edisi');
                 $('.abstractDocument').show();
                 $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "GIS Activity/Project") {
-//                $('#c2_abstract').attr('placeholder', 'Nama Aktiviti –Tujuan – Lokasi – Tahun');
+                //                $('#c2_abstract').attr('placeholder', 'Nama Aktiviti –Tujuan – Lokasi – Tahun');
                 $('.abstractGISActivityProject').show();
                 $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Map") {
-//                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit');
+                //                $('#c2_abstract').attr('placeholder','Nama Peta – Kawasan - Tujuan – Tahun Terbitan – Edisi – No. Siri – Skala – Unit');
                 $('.abstractMap').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Raster Data") {
-//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
+                //                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data - Tahun Perolehan - Jenis Satelit – Format – Resolusi - Kawasan Litupan');
                 $('.abstractRasterData').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Services") {
-//                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
+                //                $('#c2_abstract').attr('placeholder','Nama Servis – Lokasi – Tujuan – Data Yang Terlibat – Polisi –Peringkat Capaian- Format');
                 $('.abstractServices').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
             } else if (type == "Software") {
-//                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
+                //                $('#c2_abstract').attr('placeholder','Nama Perisian – Versi- Tujuan – Tahun Penggunaan Perisian – Kaedah Perolehan – Format – Pengeluar – Keupayaan -Data Yang Terlibat –Keperluan Perkakasan');
                 $('.abstractSoftware').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
             } else if (type == "Vector Data") {
-//                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
+                //                $('#c2_abstract').attr('placeholder','Nama Data - Lokasi - Rumusan Tentang Data - Tujuan Data - Kaedah Penyediaan Data – Format - Unit – Skala - Status Data');
                 $('.abstractVectorData').show();
                 $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
             }
@@ -648,50 +639,50 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         });
 
         <?php
-        if(!is_null(old('c2_product_type')) && old('c2_product_type') == "Application"){
-            ?>
+        if (!is_null(old('c2_product_type')) && old('c2_product_type') == "Application") {
+        ?>
             $('.abstractApplication').show();
             $('.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Document"){
-            ?>
+        <?php
+        } elseif (!is_null(old('c2_product_type')) && old('c2_product_type') == "Document") {
+        ?>
             $('.abstractDocument').show();
             $('.abstractApplication,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "GIS Activity/Project"){
-            ?>
+        <?php
+        } elseif (!is_null(old('c2_product_type')) && old('c2_product_type') == "GIS Activity/Project") {
+        ?>
             $('.abstractGISActivityProject').show();
             $('.abstractApplication,.abstractDocument,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Map"){
-            ?>
+        <?php
+        } elseif (!is_null(old('c2_product_type')) && old('c2_product_type') == "Map") {
+        ?>
             $('.abstractMap').show();
             $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractRasterData,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Raster Data"){
-            ?>
+        <?php
+        } elseif (!is_null(old('c2_product_type')) && old('c2_product_type') == "Raster Data") {
+        ?>
             $('.abstractRasterData').show();
             $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractServices,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Services"){
-            ?>
+        <?php
+        } elseif (!is_null(old('c2_product_type')) && old('c2_product_type') == "Services") {
+        ?>
             $('.abstractServices').show();
             $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractSoftware,.abstractVectorData').hide();
-            <?php
-        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Software"){
-            ?>
+        <?php
+        } elseif (!is_null(old('c2_product_type')) && old('c2_product_type') == "Software") {
+        ?>
             $('.abstractSoftware').show();
             $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractVectorData').hide();
-            <?php
-        }elseif(!is_null(old('c2_product_type')) && old('c2_product_type') == "Vector Data"){
-            ?>
+        <?php
+        } elseif (!is_null(old('c2_product_type')) && old('c2_product_type') == "Vector Data") {
+        ?>
             $('.abstractVectorData').show();
             $('.abstractApplication,.abstractDocument,.abstractGISActivityProject,.abstractMap,.abstractRasterData,.abstractServices,.abstractSoftware').hide();
-            <?php
+        <?php
         }
         ?>
 
-        $(".abstractElement").keyup(function(){
+        $(".abstractElement").keyup(function() {
             var type = $('#c2_product_type').val();
             var abstractText = "";
             var typeSelector = "";
@@ -715,9 +706,9 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             }
 
             var elements = $(typeSelector).find('.abstractElement');
-            $(elements).each(function(index){
-                if($(this).val() !== ""){
-                    abstractText += $(this).val()+'  ';
+            $(elements).each(function(index) {
+                if ($(this).val() !== "") {
+                    abstractText += $(this).val() + '  ';
                 }
             });
             abstractText = abstractText.trim();
@@ -727,30 +718,31 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
 
         <?php
         if (!is_null(old('kategori'))) {
-            ?>
+        ?>
             //$("#kategori").val("{{ old('kategori') }}").trigger('change');
-            <?php
+        <?php
         }
         ?>
-                
+
         setInterval(
             autosave_metadata,
-            180000  //this value is in miliseconds. currently set at 3 minutes
+            180000 //this value is in miliseconds. currently set at 3 minutes
         );
-        function autosave_metadata(){
-            if($('#metadata_id').val() != ""){ //update
+
+        function autosave_metadata() {
+            if ($('#metadata_id').val() != "") { //update
                 $.ajax({
-                    type: "POST", 
+                    type: "POST",
                     url: '{{url("simpan_kemaskini_metadata")}}',
-                    data: $("#form_metadata").serialize()+'&autosave=true&page=pengisian',
-                    success: function(){}
+                    data: $("#form_metadata").serialize() + '&autosave=true&page=pengisian',
+                    success: function() {}
                 });
-            }else{ //create
+            } else { //create
                 $.ajax({
-                    type: "POST", 
+                    type: "POST",
                     url: '{{url("store_metadata")}}',
-                    data: $("#form_metadata").serialize()+'&autosave=true&page=pengisian',
-                    success: function(response){
+                    data: $("#form_metadata").serialize() + '&autosave=true&page=pengisian',
+                    success: function(response) {
                         var res = JSON.parse(response);
                         $('#metadata_id').val(res.metadata_id);
                     }
@@ -767,15 +759,16 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
     var map = L.map('map').setView([5.3105, 107.3854408], 5);
     L.control.scale().addTo(map);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
             'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: - 1
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1
     }).addTo(map);
     drawRectangleEditor();
     searchLocation();
+
     function updateLayer() {
         var nbltValue = document.getElementById("nblt").value;
         var wblgValue = document.getElementById("wblg").value;
@@ -820,7 +813,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
             },
             draw: {
                 rectangle: {
-                allowIntersection: false, // Restricts shapes to simple polygons
+                    allowIntersection: false, // Restricts shapes to simple polygons
                     drawError: {
                         color: '#e1e100', // Color the shape will turn when intersects
                         message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
@@ -837,14 +830,14 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                 marker: false,
             }
         };
-    // Initialise the draw control and pass it the FeatureGroup of editable layers
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
         var drawControl = new L.Control.Draw(drawPluginOptions);
         map.addControl(drawControl);
         var editableLayers = new L.FeatureGroup();
         map.addLayer(editableLayers);
         map.on('draw:created', function(e) {
             var type = e.layerType,
-            layer = e.layer;
+                layer = e.layer;
             var coordinatesData = layer.getLatLngs();
             var drawNblt = coordinatesData[0][1];
             var drawWblg = coordinatesData[0][1];
@@ -864,10 +857,10 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         var rectangle;
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 18,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, '+'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox/streets-v11',
             tileSize: 512,
-            zoomOffset: - 1
+            zoomOffset: -1
         }).addTo(map);
         var bounds = [
             [nblt, wblg],
@@ -884,12 +877,12 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox/streets-v11',
             tileSize: 512,
-            zoomOffset: - 1
+            zoomOffset: -1
         }).addTo(map);
-        
+
         $("#nblt,#wblg,#sblt,#eblg").val("");
     }
 
@@ -898,8 +891,7 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
         var wblgValue = document.getElementById("wblg").value;
         var sbltValue = document.getElementById("sblt").value;
         var eblgValue = document.getElementById("eblg").value;
-        var data = ["North Bound Latitude: " + nbltValue, "West Bound Longitude: " + wblgValue,"South Bound Latitude: " + sbltValue, "East Bound Longitude: " + eblgValue
-        ];
+        var data = ["North Bound Latitude: " + nbltValue, "West Bound Longitude: " + wblgValue, "South Bound Latitude: " + sbltValue, "East Bound Longitude: " + eblgValue];
         alert(data);
     }
 </script>

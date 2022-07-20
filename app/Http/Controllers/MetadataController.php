@@ -294,29 +294,32 @@ function getXmlWms(Request $request){
             $out
             XML;
     $ftestxml2 = str_replace("&#13;", "", $ftestxml2);
+    $ftestxml2 = str_replace("xlink:", "", $ftestxml2);
     $ftestxml2 = str_replace("\r", "", $ftestxml2);
     $ftestxml2 = str_replace("\n", "", $ftestxml2);
     $ftestxml2 = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $ftestxml2);
-
     $xml2 = simplexml_load_string($ftestxml2);
 
-    $layers = "";
+    $data = ['layers'=>'','legendIcon'=>[]];
 
     if (false === $xml2) {
         dd('isfalse');
     }else{
-        // dd($xml2->Capability->Layer);
         foreach($xml2->Capability->Layer->Layer as $m){
             if(count($m->Layer) > 0){
                 foreach($m->Layer as $b){
-                    $layers .= $b->Name.',';
+                    // get layers
+                    $data['layers'] = $data['layers'].$b->Name.',';
+                    
+                    //get icons for legend
+                    $data['legendIcon'][strval($b->Title)] = strval($b->Style->LegendURL->OnlineResource['href']);
                 }
             }
         }
-        $layers = rtrim($layers,',');
-    }
+        $data['layers'] = rtrim($data['layers'],',');
 
-    echo $layers;
+    }
+    echo json_encode($data);
 }
 
 function getUser($user_id) {

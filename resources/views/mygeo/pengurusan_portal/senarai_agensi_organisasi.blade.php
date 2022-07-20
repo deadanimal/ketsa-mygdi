@@ -160,13 +160,16 @@
                                                 <td>{{ $ao->bahagian != '' ? $ao->bahagian : $ao->name }}</td>
                                                 <td>
                                                     @if ($ao->bahagian != '')
-                                                        <button type="button"
+                                                    <span  data-toggle="tooltip" title="Kemas Kini">
+                                                    <button type="button"
                                                             class="btn btn-sm btn-success btnKemaskiniBahagian"
                                                             data-rowid="{{ $ao->id }}" data-toggle="modal"
                                                             data-target="#modal_kemaskini_bahagian">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
+                                                </scan>
                                                     @else
+                                                    <span  data-toggle="tooltip" title="Kemas Kini">
                                                         <button type="button"
                                                             class="btn btn-sm btn-success btnKemaskiniAgensiOrganisasi"
                                                             data-rowid="{{ $ao->id }}"
@@ -174,6 +177,7 @@
                                                             data-target="#modal_kemaskini_agensi_organisasi">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
+                                                </span>
                                                     @endif
                                                     @if ($ao->bahagian != '')
                                                         <button type="button" data-rowid="{{ $ao->id }}"
