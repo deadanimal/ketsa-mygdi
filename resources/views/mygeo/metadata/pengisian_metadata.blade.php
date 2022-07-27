@@ -726,8 +726,9 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
 
         setInterval(
             autosave_metadata,
-            180000 //this value is in miliseconds. currently set at 3 minutes
-        );
+            // 180000 //this value is in miliseconds. currently set at 3 minutes
+            60000 //this value is in miliseconds. currently set at 3 minutes
+            );
 
         function autosave_metadata() {
             if ($('#metadata_id').val() != "") { //update
@@ -743,8 +744,12 @@ if (isset($_GET['bhs']) && $_GET['bhs'] != "") {
                     url: '{{url("store_metadata")}}',
                     data: $("#form_metadata").serialize() + '&autosave=true&page=pengisian',
                     success: function(response) {
-                        var res = JSON.parse(response);
-                        $('#metadata_id').val(res.metadata_id);
+                        if (typeof response.metadata_id !== 'undefined') {
+                           var res = JSON.parse(response);
+                           $('#metadata_id').val(res.metadata_id);
+                        }else{
+                            console.log(response);
+                        }
                     }
                 });
             }
