@@ -3660,7 +3660,7 @@ public function index_nologin(Request $request) {
             }else{
                 $validator = Validator::make($request->all(), $fields);
                 if($validator->fails()){
-    //                dd($validator->errors()->first());
+                //    dd($validator->errors()->first());
                     return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melebihi 10MB']);
                 }
     //            $this->validate($request, $fields, $customMsg);
