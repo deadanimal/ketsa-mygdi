@@ -431,10 +431,16 @@ class PortalController extends Controller
     }
 
     public function simpan_agensi_organisasi(Request $request){
-        if($request->namaAgensiOrganisasi != "" && !isset($request->namaBahagian)){
+        if($request->namaAgensiOrganisasi != "" && !isset($request->namaBahagian)){ 
             $aoi = AgensiOrganisasi::where('name','ILIKE',$request->namaAgensiOrganisasi)->whereNull('bahagian')->get()->first();
             if(!empty($aoi)){
                 echo json_encode(["error"=>"1","msg"=>"Nama Agensi / Organisasi / Institusi telah wujud. Sila pilih nama lain."]);
+                exit();
+            }
+        }elseif($request->namaAgensiOrganisasi != "" && isset($request->namaBahagian) && $request->namaBahagian != ""){
+            $aoi = AgensiOrganisasi::where('name','ILIKE',$request->namaAgensiOrganisasi)->where('bahagian','ILIKE',$request->namaBahagian)->get()->first();
+            if(!empty($aoi)){
+                echo json_encode(["error"=>"1","msg"=>"Nama Bahagian telah wujud. Sila pilih nama lain."]);
                 exit();
             }
         }
