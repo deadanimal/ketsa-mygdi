@@ -3050,7 +3050,7 @@ public function index_nologin(Request $request) {
             foreach($val as $vKey=>$vVal){
                 if(isset($vVal['mandatory']) && $vVal['mandatory'] == "yes"){
                     if($vKey == "file_contohJenisMetadata"){
-                        $mandatory_fields[$vKey] = "mimetypes:application/pdf|max:10000";
+                        $mandatory_fields[$vKey] = "required|mimetypes:application/pdf|max:10000";
                     }else{
                         if($request->c1_content_info != "Application" && $vKey == "c10_file_url"){
                             continue;
@@ -3064,92 +3064,6 @@ public function index_nologin(Request $request) {
 //        exit();
         
         $fields = $mandatory_fields;
-        /*
-        $fields = [
-            "c1_content_info" => 'required',
-            "publisher_name" => 'required',
-            "publisher_agensi_organisasi" => 'required',
-            "publisher_email" => 'required',
-            "publisher_phone" => 'required',
-            "c2_metadataName" => 'required',
-            "c2_product_type" => 'required',
-            "c2_abstract" => 'required',
-            "c2_contact_agensiorganisasi" => 'required',
-            "c2_contact_state" => 'required',
-            "c2_contact_email" => 'required',
-            "c2_contact_phone_office" => 'required',
-            "c9_west_bound_longitude" => 'required',
-            "c9_east_bound_longitude" => 'required',
-            "c9_south_bound_latitude" => 'required',
-            "c9_north_bound_latitude" => 'required',
-            "c10_keyword" => 'required',
-            "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
-        ];
-
-        if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {
-            $fields["c10_file_url"] = 'required';
-        }
-        if (trim($request->c10_file_url) != '') {
-            $fields["c10_file_name"] = 'required';
-            $fields["c10_file_type"] = 'required';
-        }
-        if (trim($request->c10_file_name) != '') {
-            $fields["c10_file_url"] = 'required';
-            $fields["c10_file_type"] = 'required';
-        }
-        if (trim($request->c10_file_type) != '') {
-            $fields["c10_file_url"] = 'required';
-            $fields["c10_file_name"] = 'required';
-        }
-        if (strtolower($request->kategori) == 'services') {
-            $fields["c2_serviceUrl"] = 'required';
-        }
-        if (strtolower($request->kategori) == 'dataset') {
-            $fields["topic_category"] = 'required';
-        }
-        if (strtolower($request->kategori) == 'imagery' || strtolower($request->kategori) == 'gridded') {
-            $fields["c4_scan_res"] = 'required';
-            $fields["c4_ground_scan"] = 'required';
-            $fields["c6_collection_name"] = 'required';
-            $fields["c6_collection_id"] = 'required';
-            $fields["c8_identifier"] = 'required';
-            $fields["c8_type"] = 'required';
-            $fields["c8_op_identifier"] = 'required';
-        }
-
-        $customMsg = [
-            "c1_content_info.required" => 'Content Information required',
-            "publisher_name.required" => 'Publisher Name required',
-            "publisher_agensi_organisasi.required" => 'Publisher Agency or Organisation required',
-            "publisher_email.required" => 'Publisher Email required',
-            "publisher_phone.required" => 'Publisher Phone required',
-            "c2_metadataName.required" => 'Metadata Name required',
-            "c2_product_type.required" => 'Type of Product required',
-            "c2_abstract.required" => 'Metadata Abstract required',
-            "c2_contact_agensiorganisasi.required" => 'Responsible Party Agency or Organisation required',
-            "c2_contact_state.required" => 'State required',
-            "c2_contact_email.required" => 'Responsible Party Email required',
-            "c2_contact_phone_office.required" => 'Responsible Party Phone Number required',
-            "c4_scan_res.required" => 'Scanning Resolution required',
-            "c4_ground_scan.required" => 'Ground Scanning required',
-            "c6_collection_name.required" => 'Collection Name required',
-            "c6_collection_id.required" => 'Collection Identification required',
-            "c8_identifier.required" => 'Event Identifier required',
-            "c8_type.required" => 'Instrument Identification Type required',
-            "c8_op_identifier.required" => 'Operation Identifier required',
-            "c9_west_bound_longitude.required" => 'West Bound Longitude required',
-            "c9_east_bound_longitude.required" => 'East Bound Longitude required',
-            "c9_south_bound_latitude.required" => 'South Bound Latitude required',
-            "c9_north_bound_latitude.required" => 'North Bound Latitude required',
-            "c10_keyword.required" => 'Browsing Information Keyword required',
-            "topic_category.required" => 'Topic Category required',
-            "c10_file_url.required" => 'URL required',
-            "c10_file_name.required" => 'File Name required',
-            "c10_file_type.required" => 'File Type required',
-            "c2_serviceUrl.required" => 'Service URL required',
-            "file_contohJenisMetadata" => 'Sample Data must be in PDF format and max 10MB'
-        ];
-        */
 
         $elemenMetadatacol = [];
         $elemenMetadata = ElemenMetadata::where('status', '0')->get(); //get disabled inputs and remove their validation
@@ -3204,9 +3118,13 @@ public function index_nologin(Request $request) {
             var_dump($validator->errors());exit();
         }
     }else{
-        $validator = Validator::make($request->all(), $fields);
+        $customMessage = [
+            "file_contohJenisMetadata.mimetypes" => 'File Upload mesti dalam format PDF',
+            "file_contohJenisMetadata.max" => 'File Upload mesti tidak melebihi 10MB'
+        ];
+        $validator = Validator::make($request->all(), $fields,$customMessage);
         if($validator->fails()){
-//                dd($validator->errors()->first());
+            //    dd($validator->errors()->first());
             return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melebihi 10MB']);
         }
 //            $this->validate($request, $fields, $customMsg);
@@ -3532,7 +3450,7 @@ public function index_nologin(Request $request) {
                         foreach($val as $vKey=>$vVal){
                             if(isset($vVal['mandatory']) && $vVal['mandatory'] == "yes"){
                                 if($vKey == "file_contohJenisMetadata"){
-                                    $mandatory_fields[$vKey] = "mimetypes:application/pdf|max:10000";
+                                    $mandatory_fields[$vKey] = "mimetypes:required|application/pdf|max:10000";
                                 }else{
                                     if($request->c1_content_info != "Application" && $vKey == "c10_file_url"){
                                         continue;
@@ -3547,105 +3465,6 @@ public function index_nologin(Request $request) {
 
                     $fields = $mandatory_fields;
 
-            /*
-            $fields = [
-                "c1_content_info" => 'required',
-                "publisher_name" => 'required',
-                "publisher_agensi_organisasi" => 'required',
-                "publisher_email" => 'required',
-                "publisher_phone" => 'required',
-                "c2_metadataName" => 'required',
-                "c2_product_type" => 'required',
-                "c2_abstract" => 'required',
-                "c2_contact_agensiorganisasi" => 'required',
-                "c2_contact_state" => 'required',
-                "c2_contact_email" => 'required',
-                "c2_contact_phone_office" => 'required',
-                "c9_west_bound_longitude" => 'required',
-                "c9_east_bound_longitude" => 'required',
-                "c9_south_bound_latitude" => 'required',
-                "c9_north_bound_latitude" => 'required',
-                "c10_keyword" => 'required',
-                "file_contohJenisMetadata" => "mimetypes:application/pdf|max:10000"
-            ];
-
-            if (strtolower($request->kategori) == 'dataset' && strtolower($request->c1_content_info) == 'application') {
-                $fields["c10_file_url"] = 'required';
-            }
-            if (trim($request->c10_file_url) != '') {
-                $fields["c10_file_name"] = 'required';
-                $fields["c10_file_type"] = 'required';
-            }
-            if (trim($request->c10_file_name) != '') {
-                $fields["c10_file_url"] = 'required';
-                $fields["c10_file_type"] = 'required';
-            }
-            if (trim($request->c10_file_type) != '') {
-                $fields["c10_file_url"] = 'required';
-                $fields["c10_file_name"] = 'required';
-            }
-            if (strtolower($request->kategori) == 'services') {
-                $fields["c2_serviceUrl"] = 'required';
-            }
-            if (strtolower($request->kategori) == 'dataset') {
-                $fields["topic_category"] = 'required';
-            }
-            if (strtolower($request->kategori) == 'imagery' || strtolower($request->kategori) == 'gridded') {
-                $fields["c4_scan_res"] = 'required';
-                $fields["c4_ground_scan"] = 'required';
-                $fields["c6_collection_name"] = 'required';
-                $fields["c6_collection_id"] = 'required';
-                $fields["c8_identifier"] = 'required';
-                $fields["c8_type"] = 'required';
-                $fields["c8_op_identifier"] = 'required';
-            }
-
-            $customMsg = [
-                "c1_content_info.required" => 'Content Information required',
-                "publisher_name.required" => 'Publisher Name required',
-                "publisher_agensi_organisasi.required" => 'Publisher Agency or Organisation required',
-                "publisher_email.required" => 'Publisher Email required',
-                "publisher_phone.required" => 'Publisher Phone required',
-                "c2_metadataName.required" => 'Metadata Name required',
-                "c2_product_type.required" => 'Type of Product required',
-                "c2_abstract.required" => 'Metadata Abstract required',
-                "c2_contact_agensiorganisasi.required" => 'Responsible Party Agency or Organisation required',
-                "c2_contact_state.required" => 'State required',
-                "c2_contact_email.required" => 'Responsible Party Email required',
-                "c2_contact_phone_office.required" => 'Responsible Party Phone Number required',
-                "c4_scan_res.required" => 'Scanning Resolution required',
-                "c4_ground_scan.required" => 'Ground Scanning required',
-                "c6_collection_name.required" => 'Collection Name required',
-                "c6_collection_id.required" => 'Collection Identification required',
-                "c8_identifier.required" => 'Event Identifier required',
-                "c8_type.required" => 'Instrument Identification Type required',
-                "c8_op_identifier.required" => 'Operation Identifier required',
-                "c9_west_bound_longitude.required" => 'West Bound Longitude required',
-                "c9_east_bound_longitude.required" => 'East Bound Longitude required',
-                "c9_south_bound_latitude.required" => 'South Bound Latitude required',
-                "c9_north_bound_latitude.required" => 'North Bound Latitude required',
-                "c10_keyword.required" => 'Browsing Information Keyword required',
-                "topic_category.required" => 'Topic Category required',
-                "c10_file_url.required" => 'URL required',
-                "c10_file_name.required" => 'File Name required',
-                "c10_file_type.required" => 'File Type required',
-                "c2_serviceUrl.required" => 'Service URL required',
-            ];
-
-            $elemenMetadatacol = [];
-            $elemenMetadata = ElemenMetadata::where('status', '0')->get(); //get disabled inputs and remove their validation
-            if (count($elemenMetadata) > 0) {
-                foreach ($elemenMetadata as $em) {
-                    $elemenMetadatacol[] = $em->input_name;
-                }
-                foreach ($fields as $key => $val) {
-                    if (in_array($key, $elemenMetadatacol)) {
-                        unset($fields[$key]); //remove them validations
-                    }
-                }
-            }
-            */
-
             $refsysname = "";
             if(isset($request->c13_ref_sys_identify) && !empty($request->c13_ref_sys_identify)){
                 $refSysSelected = ReferenceSystemIdentifier::where('name', $request->c13_ref_sys_identify)->get()->first();
@@ -3658,7 +3477,11 @@ public function index_nologin(Request $request) {
                     exit();
                 }
             }else{
-                $validator = Validator::make($request->all(), $fields);
+                $customMessage = [
+                    "file_contohJenisMetadata.mimetypes" => 'File Upload mesti dalam format PDF',
+                    "file_contohJenisMetadata.max" => 'File Upload mesti tidak melebihi 10MB'
+                ];
+                $validator = Validator::make($request->all(), $fields,$customMessage);
                 if($validator->fails()){
                 //    dd($validator->errors()->first());
                     return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melebihi 10MB']);
