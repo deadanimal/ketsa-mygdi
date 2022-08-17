@@ -21,7 +21,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-3">
-                                        <img height="150" class="img-center" src="{{ !is_null($tatacara) ? url($tatacara->icon_path) : '' }}" alt="">
+                                        <img height="150" class="img-center" src="{{ !is_null($tatacara) ? url(strval($tatacara->icon_path)) : '' }}" alt="">
                                     </div>
                                     <div class="col-8">
                                         <p class="heading text-muted">{{ $loop->iteration }}) {{ $tatacara->title }}
