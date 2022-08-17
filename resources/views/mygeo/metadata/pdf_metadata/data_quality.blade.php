@@ -122,7 +122,7 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness" role="tab" aria-controls="completeness" aria-selected="true">Completeness</a>
+                                <a class="nav-link active" id="tab_completeness" data-toggle="pill" href="#completeness" role="tab" aria-controls="completeness" aria-selected="true">DQ 1 COMPLETENESS</a>
                             </li>
                         </ul>
                     </div>
@@ -136,10 +136,10 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-control-label"><b>Completeness Commission</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 1.1 Completeness Commission</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Completeness Omission</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 1.2 Completeness Omission</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -349,7 +349,7 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_consistency" data-toggle="pill" href="#consistency" role="tab" aria-controls="consistency" aria-selected="false">Consistency</a>
+                                <a class="nav-link active" id="tab_consistency" data-toggle="pill" href="#consistency" role="tab" aria-controls="consistency" aria-selected="false">DQ 2 LOGICAL CONSISTENCY</a>
                             </li>
                         </ul>
                     </div>
@@ -363,16 +363,16 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-control-label"><b>Conceptual Consistency</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 2.1 Conceptual Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Domain Consistency</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 2.2 Domain Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Format Consistency</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 2.3 Format Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Topological Consistency</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 2.4 Topological Consistency</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -757,7 +757,7 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_position_accuracy" data-toggle="pill" href="#position_accuracy" role="tab" aria-controls="position_accuracy" aria-selected="false">Positional Accuracy</a>
+                                <a class="nav-link active" id="tab_position_accuracy" data-toggle="pill" href="#position_accuracy" role="tab" aria-controls="position_accuracy" aria-selected="false">DQ 3 POSITIONAL ACCURACY</a>
                             </li>
                         </ul>
                     </div>
@@ -771,13 +771,13 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-control-label"><b>Absolute or External Accuracy</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 3.1 Absolute or External Accuracy</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Relative or Internal Accuracy</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 3.2 Relative or Internal Accuracy</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Gridded Data Accuracy</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 3.3 Gridded Data Accuracy</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1071,7 +1071,7 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_temp_accuracy" data-toggle="pill" href="#temp_accuracy" role="tab" aria-controls="temp_accuracy" aria-selected="false">Temporal Accuracy</a>
+                                <a class="nav-link active" id="tab_temp_accuracy" data-toggle="pill" href="#temp_accuracy" role="tab" aria-controls="temp_accuracy" aria-selected="false">DQ 4 TEMPORAL ACCURACY</a>
                             </li>
                         </ul>
                     </div>
@@ -1085,13 +1085,13 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <label class="form-control-label"><b>Accuracy or Time Measurement</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 4.1 Accuracy or Time Measurement</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Temporal Consistency</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 4.2 Temporal Consistency</b></label>
                                                         </td>
                                                         <td>
-                                                            <label class="form-control-label"><b>Temporal Validity</b></label>
+                                                            <label class="form-control-label"><b>Sub DQ 4.3 Temporal Validity</b></label>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1387,7 +1387,7 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_thematic_accuracy" data-toggle="pill" href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy" aria-selected="false">Thematic Accuracy</a>
+                                <a class="nav-link active" id="tab_thematic_accuracy" data-toggle="pill" href="#thematic_accuracy" role="tab" aria-controls="thematic_accuracy" aria-selected="false">DQ 5 THEMATIC ACCURACY</a>
                             </li>
                         </ul>
                     </div>

@@ -3112,11 +3112,11 @@ public function index_nologin(Request $request) {
         }
     }
 
-    if(isset($request->autosave)){
-        $validator = Validator::make($request->all(), $fields);
-        if($validator->fails()){
-            var_dump($validator->errors());exit();
-        }
+    if(isset($request->autosave) || isset($request->btn_draf) || (isset($request->submitAction) && $request->submitAction == "draf")){
+        // $validator = Validator::make($request->all(), $fields);
+        // if($validator->fails()){
+        //     var_dump($validator->errors());exit();
+        // }
     }else{
         $customMessage = [
             "file_contohJenisMetadata.mimetypes" => 'File Upload mesti dalam format PDF',
