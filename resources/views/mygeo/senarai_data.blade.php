@@ -400,7 +400,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="{{ url('simpan_senarai_data') }}">
+                    <form method="POST" action="{{ url('simpan_senarai_data') }}" id="formTambahLapisanData">
                         @csrf
                         <div class="modal-body row">
                             <div class="col-12">
@@ -430,7 +430,7 @@
                                 </div>
                                 <div style="font-size: 12px;" class="infoData"></div>
 
-                                <button class="btn btn-success float-right mt-4" type="submit">
+                                <button class="btn btn-success float-right mt-4" type="button" id="btnSumbitTambahLapisanData">
                                     <span class="text-white">Tambah</span>
                                 </button>
 
@@ -621,6 +621,13 @@
     @foreach ($kategori_sd as $ksd)
         <script>
             $(document).ready(function() {
+                $("#btnSumbitTambahLapisanData").unbind().click(function(){
+                    if($('#kategori_s').val() == null){
+                        alert('Sila pilih Kategori');
+                    }else{
+                        $("#formTambahLapisanData").submit();
+                    }
+                });
                 $("#senDataTable{{ $ksd->id }}").DataTable({
                     "dom": "<'row'<'col-sm-3'l> <'col-sm-6 text-center' ><'col-sm-3'f >> " +
                         "<'row'<'col-sm-12'tr>>" + "<'row mt-4'<'col-sm-5'i> <'col-sm-7'p >> ",
