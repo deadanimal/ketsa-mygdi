@@ -329,10 +329,10 @@ class DataAsasController extends Controller
             $to_name = Auth::user()->name;
             $to_email = Auth::user()->email;
             $data = array('m' => $m2);
-            // Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
-            //     $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
-            //     $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-            // });
+            Mail::send("mails.exmpl17", $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Penilaian bagi data yang dimuat turun");
+                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+            });
 
         }
 
@@ -446,11 +446,11 @@ class DataAsasController extends Controller
             $to_email = $pemohon->users->email;
 //            $to_email = 'farhan15959@gmail.com';
             $data = array('cat' => 'cat');
-            // Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
-            //     $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
-            //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-            //     // $message->attach($file);
-            // });
+            Mail::send("mails.exmpl15", $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("MyGeo Explorer - Data tersedia");
+                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                // $message->attach($file);
+            });
 
             $at = new AuditTrail();
             $at->path = url()->full();
@@ -1364,28 +1364,29 @@ class DataAsasController extends Controller
                     $mail = "mails.exmpl14";
                     $subject = "MyGeo Explorer - Permohonan Ditolak";
                 }
-
                 if ($request->status != '0') {
                     //send email to pemohon data
                     $to_name = $pemohon->users->name;
                     $to_email = $pemohon->users->email;
+                    
                     $data = [
                         'catatan' => $request->catatan,
                         'catatan_lain' => $request->catatan_lain,
                     ];
+                    // dd($request->status,$request->catatan,$mail,$data,$to_email,$to_name,$subject);
                     if ($request->catatan == "others") {
-                        // Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
-                        //     $message->to($to_email, $to_name)->subject($subject);
-                        //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        // });
+                        Mail::send("mails.exmpl14-1", $data, function ($message) use ($to_name, $to_email, $subject) {
+                            $message->to($to_email, $to_name)->subject($subject);
+                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });
                     } else {
-                        // Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
-                        //     $message->to($to_email, $to_name)->subject($subject);
-                        //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        // });
+                        Mail::send($mail, $data, function ($message) use ($to_name, $to_email, $subject) {
+                            $message->to($to_email, $to_name)->subject($subject);
+                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });
                     }
                 }
-
+                // exit();
                 $at = new AuditTrail();
                 $at->path = url()->full();
                 $at->user_id = Auth::user()->id;
@@ -1456,10 +1457,10 @@ class DataAsasController extends Controller
                     $to_name = $p->name;
                     $to_email = $p->email;
                     $data = ['nama_pemohon' => $pemohon->users->name, 'agensi' => $agensi_pemohon];
-                    // Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
-                    //     $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
-                    //     // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    // });
+                    Mail::send('mails.exmpl12', $data, function ($message) use ($to_name, $to_email, $pemohon) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Permohonan Baru  (' . $pemohon->name . ')');
+                        // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    });
                 }
             }
 

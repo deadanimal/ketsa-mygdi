@@ -928,7 +928,7 @@ public function index_nologin(Request $request) {
     }
 
     public function edit($id) {
-        if (!auth::user()->hasRole(['Pengesah Metadata', 'Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
+        if (!auth::user()->hasRole(['Pengesah Metadata', 'Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi','Pentadbir Metadata'])) {
             exit();
         }
 
@@ -3253,10 +3253,10 @@ public function index_nologin(Request $request) {
                 $to_name = $pengesahs->name;
                 $to_email = $pengesahs->email;
                 $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-                        // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-                                // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-                                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        // });						
+                        Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+                                $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+                                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });						
 //                    }
 //                }
                 $msg = "Metadata berjaya dihantar.";
@@ -3439,6 +3439,7 @@ public function index_nologin(Request $request) {
                     $this->store($request);
                     return redirect('mygeo_senarai_metadata')->with('message', 'Metadata Berjaya Dihantar');
                 }else{
+                    $m = MetadataGeo::on('pgsql2')->where('id', $request->metadata_id)->get()->first();
                     $mt = MetadataTemplate::where('status','active')->get()->first();
     //        dd($mt,strtolower($request->kategori),$mt->template[strtolower($request->kategori)]);
                     $mandatory_fields = [];
@@ -3450,7 +3451,9 @@ public function index_nologin(Request $request) {
                         foreach($val as $vKey=>$vVal){
                             if(isset($vVal['mandatory']) && $vVal['mandatory'] == "yes"){
                                 if($vKey == "file_contohJenisMetadata"){
-                                    $mandatory_fields[$vKey] = "mimetypes:required|application/pdf|max:10000";
+                                    if($m->file_contohjenismetadata == ""){
+                                        $mandatory_fields[$vKey] = "required|mimetypes:application/pdf|max:10000";
+                                    }
                                 }else{
                                     if($request->c1_content_info != "Application" && $vKey == "c10_file_url"){
                                         continue;
@@ -3483,7 +3486,7 @@ public function index_nologin(Request $request) {
                 ];
                 $validator = Validator::make($request->all(), $fields,$customMessage);
                 if($validator->fails()){
-                //    dd($validator->errors()->first());
+                   // dd($validator->errors()->first());
                     return Redirect::back()->withInput($request->all())->withErrors(['msg' => 'Sila lengkapkan semua elemen mandatori yang ditanda dengan tanda (<span class="text-warning">*</span>).<br>File Upload mesti dalam format PDF dan tidak melebihi 10MB']);
                 }
     //            $this->validate($request, $fields, $customMsg);
@@ -3629,10 +3632,10 @@ public function index_nologin(Request $request) {
                     $to_name = $pengesahs->name;
                     $to_email = $pengesahs->email;
                     $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-                            // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-                                // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-                                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                            // });
+                            Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+                                $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+                                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            });
     //                    }
     //                }
 
@@ -3661,10 +3664,10 @@ public function index_nologin(Request $request) {
                             $to_name = $user->name;
                             $to_email = $user->email;
                             $data = array('title' => $metadataName);
-                            // Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                                // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
-                                // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                            // });
+                            Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                                $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
+                                $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                            });
                         }
                     } elseif (auth::user()->hasRole(['Penerbit Metadata', 'Super Admin', 'Pentadbir Aplikasi'])) {
                         $mg->disahkan = '0';
@@ -3677,10 +3680,10 @@ public function index_nologin(Request $request) {
                         $to_name = $pengesahs->name;
                         $to_email = $pengesahs->email;
                         $data = array('title' => $request->c2_metadataName, 'namaPenerbit' => Auth::user()->name);
-                                // Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
-                                    // $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
-                                    // $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                                // });
+                                Mail::send('mails.exmpl10', $data, function ($message) use ($to_name, $to_email, $request) {
+                                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pengesahan Metadata: ' . $request->c2_metadataName);
+                                    $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                                });
     //                        }
     //                    }
                     }
@@ -3732,10 +3735,10 @@ public function index_nologin(Request $request) {
                         $to_name = $user->name;
                         $to_email = $user->email;
                         $data = array('title' => $metadataName);
-                        //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                            //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                            //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                        //});
+                        Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                            $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                            $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                        });
                     }
 
                     //create new pengumuman about the new metadata
@@ -3822,10 +3825,10 @@ public function metadata_sahkan() {
                 $to_name = $user->name;
                 $to_email = $user->email;
                 $data = array('title' => $metadataName);
-                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    //});
+                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    });
             }
         }
     } else {
@@ -3863,10 +3866,10 @@ public function metadata_sahkan() {
             $to_name = $user->name;
             $to_email = $user->email;
             $data = array('title' => $metadataName);
-                //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                    //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                    //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                //});
+                Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                    $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                });
         }
 
             //create new pengumuman about the new metadata
@@ -3910,10 +3913,10 @@ public function metadata_tidak_disahkan() {
                 $to_name = $user->name;
                 $to_email = $user->email;
                 $data = array('title' => $metadataName);
-                    //Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                        //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
-                        //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                    //});
+                    Mail::send('mails.exmpl8', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                        $message->to($to_email, $to_name)->subject('MyGeo Explorer - Penerbitan Metadata : ' . $metadataName);
+                        $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                    });
             }
         }
     } else {
@@ -3931,10 +3934,10 @@ public function metadata_tidak_disahkan() {
             $to_name = $user->name;
             $to_email = $user->email;
             $data = array('title' => $metadataName);
-                //Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
-                    //$message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
-                    //$message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
-                //});
+                Mail::send('mails.exmpl9', $data, function ($message) use ($to_name, $to_email, $metadataName) {
+                    $message->to($to_email, $to_name)->subject('MyGeo Explorer - Pindaan Metadata : ' . $metadataName);
+                    $message->from('mail@mygeo-explorer.gov.my', 'mail@mygeo-explorer.gov.my');
+                });
         }
     }
 
