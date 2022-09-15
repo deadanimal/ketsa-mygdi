@@ -44,13 +44,20 @@
                                     <button type="button" class="btn btn-sm btn-default btn_file_contohjenismetadata" data-href='{{ url('download_file_contohjenismetadata').'/'.$metadataSearched->id }}'>Muat Turun</button>
                                 </div>
                                 <br>
+                                <div class="row">
+                                    <input class="form-control ml-3" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
+                                    <span style="font-size: smaller;color:#ffc107;">* Upload Format: PDF, Max 10MB</span>
+                                </div>
+                                <?php
+                            }else{
+                                ?>
+                                <div class="row">
+                                    <input class="form-control ml-3" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
+                                    <span style="font-size: smaller;color:#ffc107;">* Upload Format: PDF, Max 10MB</span>
+                                </div>
                                 <?php
                             }
                             ?>
-                            <div class="row">
-                                <input class="form-control ml-3" id="file_contohJenisMetadata" type="file" name="file_contohJenisMetadata" />
-                                <span style="font-size: smaller;color:#ffc107;">* Upload Format: PDF, Max 10MB</span>
-                            </div>
                             <p class="error-message"><span></span></p>
                         </div>
                     </div>
